@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 # Loan Calculator Application
 
-![GitHub repo size](https://img.shields.io/github/repo-size/Reykira007/kalkulator-cicilan)
+[![GitHub repo size](https://img.shields.io/github/repo-size/Reykira007/kalkulator-cicilan)](https://github.com/Reykira007/kalkulator-cicilan)
 
 > **Loan Calculator Application** A comprehensive loan calculator that helps users estimate loan payments, interest, and create a payment schedule based on various inputs like item type, cash price, down payment, tenor, and interest rates.
 
