@@ -111,7 +111,7 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
                 </div>
 
                 {/* Tenor */}
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                     <Label>Tenor (Bulan)</Label>
                     <Select
                         value={loanDetails.tenor.toString()}
@@ -128,6 +128,22 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
                             ))}
                         </SelectContent>
                     </Select>
+                </div> */}
+
+                {/* Tenor dengan Input Manual */}
+                <div className="space-y-2">
+                    <Label htmlFor="tenor">Tenor (Bulan)</Label>
+                    <Input
+                        id="tenor"
+                        type="number"
+                        value={loanDetails.tenor || ""}
+                        onChange={(e) => onInputChange("tenor", Number(e.target.value))}
+                        placeholder="Masukkan tenor dalam bulan"
+                        className={errors.tenor ? "border-red-500" : ""}
+                    />
+                    {errors.tenor && (
+                        <p className="text-red-500 text-sm">{errors.tenor}</p>
+                    )}
                 </div>
 
                 {/* Pilihan Metode Input */}

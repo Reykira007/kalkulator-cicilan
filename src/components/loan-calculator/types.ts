@@ -48,3 +48,11 @@ export interface RegulationType {
     maximumLoan?: number;
     averageMarketRate: number;
 }
+
+export interface ChartData {
+    month: number;
+    payment: number;
+    principal: number;
+    interest: number;
+    balance: number;
+}

@@ -21,7 +21,7 @@ export const LoanSchedule: React.FC<LoanScheduleProps> = ({
     isIslamic,
 }) => {
     const totalInstallment = scheduleData.reduce(
-        (sum, item) => sum + item.installment,
+        (sum, item) => sum + item.payment,
         0
     );
     const totalPrincipal = scheduleData.reduce(
@@ -53,7 +53,7 @@ export const LoanSchedule: React.FC<LoanScheduleProps> = ({
                             <TableRow key={index}>
                                 <TableCell className="text-center">{item.month}</TableCell>
                                 <TableCell className="text-right">
-                                    {formatCurrency(item.installment)}
+                                    {formatCurrency(item.payment)}
                                 </TableCell>
                                 <TableCell className="text-right">
                                     {formatCurrency(item.principal)}
