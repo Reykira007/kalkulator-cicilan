@@ -37,6 +37,7 @@ export interface Calculations {
         totalInterest: number;
         difference: number;
     };
+    dtiRatio?: number;
 }
 
 export interface RegulationType {

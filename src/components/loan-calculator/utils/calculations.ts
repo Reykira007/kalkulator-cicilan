@@ -1,5 +1,5 @@
 import { LoanDetails, Calculations } from "../types";
-import { SPECIAL_RATES, REGULATIONS } from "../constants"; // Tambah import REGULATIONS
+import { REGULATIONS } from "../constants"; // Tambah import REGULATIONS
 
 interface PaymentScheduleItem {
     month: number;
@@ -16,8 +16,6 @@ export const calculateEffectiveRate = (
     tenor: number
 ): number => {
     const principal = cashPrice - downPayment;
-    let effectiveRate = 0;
-    let step = 5;
     let bestRate = 0;
     let minDiff = Number.MAX_VALUE;
 
@@ -41,7 +39,7 @@ export const calculateLoan = (loanDetails: LoanDetails): Calculations => {
     const principal = loanDetails.cashPrice - loanDetails.downPayment;
     let monthlyInstallment: number;
     let effectiveRate: number;
-    let scheduleData: PaymentScheduleItem[] = [];
+    const scheduleData: PaymentScheduleItem[] = [];
 
     // Jika cicilan bulanan diinput
     if (loanDetails.monthlyPayment) {
@@ -117,56 +115,3 @@ export const calculateLoan = (loanDetails: LoanDetails): Calculations => {
 
 // Constants
 const DEFAULT_INTEREST_RATE = 10; // Default interest rate if not provided
-
-// Helper function untuk menghitung PMT (Payment for loan)
-const calculatePMT = (rate: number, nper: number, pv: number): number => {
-    if (rate === 0) return pv / nper;
-
-    const pvif = Math.pow(1 + rate, nper);
-    const pmt = rate * pv * pvif / (pvif - 1);
-
-    return pmt;
-};
-
-// Get effective rate based on special rates and conditions
-const getEffectiveRate = (loanDetails: LoanDetails): number => {
-    const specialRate = SPECIAL_RATES[loanDetails.itemType as keyof typeof SPECIAL_RATES];
-
-    if (specialRate) {
-        if (loanDetails.cashPrice <= specialRate.belowThreshold.threshold) {
-            return specialRate.belowThreshold.rate;
-        } else {
-            return specialRate.aboveThreshold.rate;
-        }
-    }
-
-    return loanDetails.interestRate || DEFAULT_INTEREST_RATE; // Use default if undefined
-};
-
-export const calculateMonthlyAffordability = (
-    monthlyIncome: number,
-    maxDTI: number,
-    otherObligations: number = 0
-): number => {
-    const maxMonthlyPayment = (monthlyIncome * maxDTI) / 100;
-    return Math.max(0, maxMonthlyPayment - otherObligations);
-};
-
-export const calculateMaxLoanAmount = (
-    monthlyPayment: number,
-    interestRate: number,
-    tenor: number,
-    isIslamic: boolean
-): number => {
-    if (isIslamic) {
-        // For Islamic financing (flat rate)
-        const annualRate = interestRate / 100;
-        const totalInterestFactor = (annualRate * tenor) / 12;
-        return (monthlyPayment * tenor) / (1 + totalInterestFactor);
-    } else {
-        // For conventional financing (effective rate)
-        const monthlyRate = interestRate / 12 / 100;
-        const pvif = Math.pow(1 + monthlyRate, tenor);
-        return monthlyPayment * (pvif - 1) / (monthlyRate * pvif);
-    }
-};

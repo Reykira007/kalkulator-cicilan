@@ -11,7 +11,7 @@ import { formatCurrency } from "@/lib/utils";
 
 interface LoanInputsProps {
     loanDetails: LoanDetails;
-    onInputChange: (field: keyof LoanDetails, value: any) => void;
+    onInputChange: (field: keyof LoanDetails, value: unknown) => void;
     errors: Record<string, string>;
 }
 

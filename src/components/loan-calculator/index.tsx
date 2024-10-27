@@ -15,7 +15,6 @@ import { calculateLoan } from "./utils/calculations";
 import { LoanDetails, Calculations, ValidationResult } from "./types";
 
 const LoanCalculator = () => {
-    // States
     const [loanDetails, setLoanDetails] = useState<LoanDetails>({
         itemName: "",
         itemType: DEFAULT_VALUES.itemType,
@@ -39,7 +38,6 @@ const LoanCalculator = () => {
     const [showRegulationInfo, setShowRegulationInfo] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
 
-    // Effects
     useEffect(() => {
         if (loanDetails.cashPrice > 0 && loanDetails.downPayment > 0) {
             try {
@@ -49,7 +47,7 @@ const LoanCalculator = () => {
                 const newValidations = validateLoanDetails(loanDetails, newCalculations);
                 setValidations(newValidations);
 
-                // Update errors based on validations
+                // Perbarui kesalahan berdasarkan validasi
                 const newErrors: Record<string, string> = {};
                 newValidations.forEach(validation => {
                     if (validation.severity === 'error') {
@@ -61,8 +59,8 @@ const LoanCalculator = () => {
                     }
                 });
                 setErrors(newErrors);
-            } catch (error) {
-                console.error('Error calculating loan:', error);
+            } catch (error: unknown) {
+                console.error('Kesalahan menghitung pinjaman:', error);
             }
         }
     }, [loanDetails]);

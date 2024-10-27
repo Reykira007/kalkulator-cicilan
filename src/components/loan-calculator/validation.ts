@@ -95,6 +95,8 @@ export const validateInputValue = (
     value: number,
     loanDetails: LoanDetails
 ): ValidationResult | null => {
+    let minDP, minIncome;
+
     switch (field) {
         case 'cashPrice':
             if (value < MINIMUM_PRICES[loanDetails.itemType]) {
@@ -107,7 +109,7 @@ export const validateInputValue = (
             break;
 
         case 'downPayment':
-            const minDP = loanDetails.cashPrice * (REGULATIONS[loanDetails.itemType].minDPPercentage / 100);
+            minDP = loanDetails.cashPrice * (REGULATIONS[loanDetails.itemType].minDPPercentage / 100);
             if (value < minDP) {
                 return {
                     isValid: false,
@@ -118,7 +120,7 @@ export const validateInputValue = (
             break;
 
         case 'monthlyIncome':
-            const minIncome = REGULATIONS[loanDetails.itemType].minimumIncome || 0;
+            minIncome = REGULATIONS[loanDetails.itemType].minimumIncome || 0;
             if (value < minIncome) {
                 return {
                     isValid: false,
@@ -130,4 +132,4 @@ export const validateInputValue = (
     }
 
     return null;
-};
+}
