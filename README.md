@@ -24,8 +24,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## 🚀 Demo
 
-You can try the live demo [here](https://airdrop-calculator.vercel.app/) to calculate your token airdrop results.
-
+You can try the live demo [here](https://kalkulator-cicilan.vercel.app/) to calculate your token airdrop results.
 ## 📷 Screenshots
 ![image](https://github.com/user-attachments/assets/de2fa0ed-8dd1-4076-8843-a991520389ce)
 ![image](https://github.com/user-attachments/assets/04b09172-c4e2-4760-941f-887c8e54c242)
