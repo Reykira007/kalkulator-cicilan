@@ -1,5 +1,5 @@
 import { LoanDetails, Calculations } from "../types";
-import { REGULATIONS } from "../constants"; // Tambah import REGULATIONS
+import { REGULATIONS } from "../constants";
 
 interface PaymentScheduleItem {
     month: number;
@@ -52,7 +52,7 @@ export const calculateLoan = (loanDetails: LoanDetails): Calculations => {
         );
     } else {
         // Perhitungan normal dengan suku bunga
-        const interestRate = loanDetails.interestRate || DEFAULT_INTEREST_RATE; // Tambahkan default
+        const interestRate = loanDetails.interestRate || DEFAULT_INTEREST_RATE;
         const monthlyRate = interestRate / 12 / 100;
 
         if (loanDetails.isIslamic) {
@@ -114,4 +114,4 @@ export const calculateLoan = (loanDetails: LoanDetails): Calculations => {
 };
 
 // Constants
-const DEFAULT_INTEREST_RATE = 10; // Default interest rate if not provided
+const DEFAULT_INTEREST_RATE = 10;

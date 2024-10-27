@@ -201,20 +201,6 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
                     )}
                 </div>
             </div>
-
-            {/* Opsi Syariah */}
-            <div className="flex items-center space-x-2">
-                <input
-                    type="checkbox"
-                    id="isIslamic"
-                    checked={loanDetails.isIslamic}
-                    onChange={(e) => onInputChange("isIslamic", e.target.checked)}
-                    className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary"
-                />
-                <Label htmlFor="isIslamic" className="cursor-pointer">
-                    Gunakan Perhitungan Syariah (Akad Murabahah)
-                </Label>
-            </div>
         </div>
     );
 };
