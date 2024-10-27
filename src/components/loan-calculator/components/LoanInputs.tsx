@@ -95,11 +95,12 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
 
                 <div className="space-y-2">
                     <Label htmlFor="downPayment">
-                        Uang Muka (Min. {REGULATIONS[loanDetails.itemType].minDPPercentage}%)
+                        Uang Muka (DP)
                     </Label>
                     <Input
                         id="downPayment"
                         type="number"
+                        min={getMinDP()} // Validasi minimum
                         value={loanDetails.downPayment || ""}
                         onChange={(e) => onInputChange("downPayment", Number(e.target.value))}
                         placeholder={`Minimal ${formatCurrency(getMinDP())}`}
@@ -110,25 +111,6 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
                     )}
                 </div>
 
-                {/* Tenor */}
-                {/* <div className="space-y-2">
-                    <Label>Tenor (Bulan)</Label>
-                    <Select
-                        value={loanDetails.tenor.toString()}
-                        onValueChange={(value) => onInputChange("tenor", Number(value))}
-                    >
-                        <SelectTrigger>
-                            <SelectValue placeholder="Pilih tenor" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            {TENOR_OPTIONS.map((tenor) => (
-                                <SelectItem key={tenor} value={tenor.toString()}>
-                                    {tenor} Bulan
-                                </SelectItem>
-                            ))}
-                        </SelectContent>
-                    </Select>
-                </div> */}
 
                 {/* Tenor dengan Input Manual */}
                 <div className="space-y-2">

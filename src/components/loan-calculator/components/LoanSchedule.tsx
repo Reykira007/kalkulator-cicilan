@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ChartData } from "../types";
+import { ChartData } from "../types"; // Pastikan ChartData sudah didefinisikan
 import { formatCurrency } from "@/lib/utils";
 import {
     Table,

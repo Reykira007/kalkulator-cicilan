@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
     LineChart,
@@ -19,13 +19,19 @@ interface LoanChartProps {
     isIslamic: boolean;
 }
 
+interface CustomTooltipProps {
+    active?: boolean;
+    payload?: { name: string; value: number; color?: string }[];
+    label?: string;
+}
+
 export const LoanChart: React.FC<LoanChartProps> = ({ data, isIslamic }) => {
-    const CustomTooltip = ({ active, payload, label }: any) => {
+    const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
         if (active && payload && payload.length) {
             return (
                 <div className="bg-white p-4 border rounded-lg shadow-lg">
                     <p className="font-medium">Bulan {label}</p>
-                    {payload.map((entry: any, index: number) => (
+                    {payload.map((entry, index) => (
                         <p key={index} style={{ color: entry.color }}>
                             {entry.name}: {formatCurrency(entry.value)}
                         </p>
@@ -69,7 +75,7 @@ export const LoanChart: React.FC<LoanChartProps> = ({ data, isIslamic }) => {
                             />
                             <Line
                                 type="monotone"
-                                dataKey="installment"
+                                dataKey="payment"
                                 stroke="#82ca9d"
                                 name="Angsuran"
                                 strokeWidth={2}
