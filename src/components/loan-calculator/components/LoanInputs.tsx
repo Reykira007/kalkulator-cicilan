@@ -5,7 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { TENOR_OPTIONS, REGULATIONS, DEFAULT_VALUES } from "../constants";
+import { REGULATIONS } from "../constants";
 import { LoanDetails, ItemType } from "../types";
 import { formatCurrency } from "@/lib/utils";
 
@@ -43,7 +43,7 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
         <div className="space-y-6">
             {/* Input Dasar */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Item Name & Type - sama seperti sebelumnya */}
+                {/* Input untuk Nama Item */}
                 <div className="space-y-2">
                     <Label htmlFor="itemName">Nama {loanDetails.itemType}</Label>
                     <Input
@@ -77,14 +77,17 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
                     </Select>
                 </div>
 
-                {/* Harga dan DP - sama seperti sebelumnya */}
+                {/* Input untuk Harga Cash */}
                 <div className="space-y-2">
                     <Label htmlFor="cashPrice">Harga Cash</Label>
                     <Input
                         id="cashPrice"
                         type="number"
-                        value={loanDetails.cashPrice || ""}
-                        onChange={(e) => onInputChange("cashPrice", Number(e.target.value))}
+                        value={loanDetails.cashPrice > 0 ? loanDetails.cashPrice : ""}
+                        onChange={(e) => {
+                            const value = Number(e.target.value);
+                            onInputChange("cashPrice", isNaN(value) ? 0 : value);
+                        }}
                         placeholder="Masukkan harga cash"
                         className={errors.cashPrice ? "border-red-500" : ""}
                     />
@@ -93,16 +96,18 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
                     )}
                 </div>
 
+                {/* Input untuk Uang Muka (DP) */}
                 <div className="space-y-2">
-                    <Label htmlFor="downPayment">
-                        Uang Muka (DP)
-                    </Label>
+                    <Label htmlFor="downPayment">Uang Muka (DP)</Label>
                     <Input
                         id="downPayment"
                         type="number"
-                        min={getMinDP()} // Validasi minimum
-                        value={loanDetails.downPayment || ""}
-                        onChange={(e) => onInputChange("downPayment", Number(e.target.value))}
+                        min={getMinDP()}
+                        value={loanDetails.downPayment > 0 ? loanDetails.downPayment : ""}
+                        onChange={(e) => {
+                            const value = Number(e.target.value);
+                            onInputChange("downPayment", isNaN(value) ? 0 : value);
+                        }}
                         placeholder={`Minimal ${formatCurrency(getMinDP())}`}
                         className={errors.downPayment ? "border-red-500" : ""}
                     />
@@ -110,7 +115,6 @@ export const LoanInputs: React.FC<LoanInputsProps> = ({
                         <p className="text-red-500 text-sm">{errors.downPayment}</p>
                     )}
                 </div>
-
 
                 {/* Tenor dengan Input Manual */}
                 <div className="space-y-2">
