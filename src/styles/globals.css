@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+
+        --popover: 0 0% 100%;
+        --popover-foreground: 222.2 84% 4.9%;
+
+        --primary: 221.2 83.2% 53.3%;
+        --primary-foreground: 210 40% 98%;
+
+        --secondary: 210 40% 96.1%;
+        --secondary-foreground: 222.2 47.4% 11.2%;
+
+        --muted: 210 40% 96.1%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+
+        --accent: 210 40% 96.1%;
+        --accent-foreground: 222.2 47.4% 11.2%;
+
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 210 40% 98%;
+
+        --border: 214.3 31.8% 91.4%;
+        --input: 214.3 31.8% 91.4%;
+        --ring: 221.2 83.2% 53.3%;
+
+        --radius: 0.75rem;
+    }
+}
+
+@layer utilities {
+    .input-shadow {
+        @apply shadow-sm focus:ring-2 focus:ring-primary/20 focus:border-primary/80;
+    }
+
+    .card-shadow {
+        @apply shadow-soft hover:shadow-strong transition-shadow duration-300;
+    }
+
+    .glass-effect {
+        @apply bg-white/80 backdrop-blur-sm;
+    }
+
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+}
+
+/* Loading animation */
+.loading {
+    @apply animate-pulse bg-gray-200;
+}
+
+/* Form styles */
+input[type="number"] {
+    @apply [appearance:textfield];
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    @apply appearance-none m-0;
+}
